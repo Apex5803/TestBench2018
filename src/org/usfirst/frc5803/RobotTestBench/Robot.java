@@ -10,14 +10,13 @@
 
 
 package org.usfirst.frc5803.RobotTestBench;
-import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc5803.RobotTestBench.commands.*;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.DriveForwardFiveFeet;
 import org.usfirst.frc5803.RobotTestBench.subsystems.*;
 
 /**
@@ -75,9 +74,12 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+    	/*
         autonomousCommand = chooser.getSelected();
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
+    */
+    	new DriveForwardFiveFeet();
     }
 
     /**

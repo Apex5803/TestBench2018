@@ -13,10 +13,7 @@ package org.usfirst.frc5803.RobotTestBench.commands;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc5803.RobotTestBench.Robot;
-//import org.usfirst.frc5803.RobotTestBench.subsystems.DriveTrain;
-import org.usfirst.frc5803.RobotTestBench.models.*;
 import org.usfirst.frc5803.RobotTestBench.utils.*;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 /**
  *
@@ -39,9 +36,6 @@ public class Drive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-<<<<<<< HEAD
-    	boolean quickTurn = Robot.driveTrain.quickTurnController();
-=======
 
  /*   	boolean quickTurn = Robot.driveTrain.quickTurnController();
 
@@ -49,6 +43,7 @@ public class Drive extends Command {
 */
 		double move = Robot.oi.xbox.getY(Hand.kLeft);
 		double rotate = Robot.oi.xbox.getX(Hand.kRight);
+		//TODO add this fix for making the robot turn the correct direction in teleop
     	Robot.driveTrain.drive(move, -rotate);
         }
 
@@ -57,14 +52,10 @@ public class Drive extends Command {
         return false;
     }
 
-
-
     // Called once after isFinished returns true
     protected void end() {
 
     }
-
-
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
