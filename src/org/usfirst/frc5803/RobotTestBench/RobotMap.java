@@ -12,6 +12,7 @@ package org.usfirst.frc5803.RobotTestBench;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
@@ -27,30 +28,30 @@ public class RobotMap {
     public static WPI_TalonSRX driveTrainDriveTrainR1;
     public static WPI_VictorSPX driveTrainDriveTrainR2;
     public static WPI_VictorSPX driveTrainDriveTrainR3;
+    public static DifferentialDrive joystickControl;
 
 
-    public static void init() {
-        driveTrainDriveTrainL1 = new WPI_TalonSRX(0);
-        driveTrainDriveTrainL1.setInverted(true);
+    public static void init() {        
+        driveTrainDriveTrainL1 = new WPI_TalonSRX(PortMap.PORT_6);
+       // driveTrainDriveTrainL1.setInverted(true);
         
-        driveTrainDriveTrainL2 = new WPI_VictorSPX(1);
-        /* CHANGED TO .follow */
+        driveTrainDriveTrainL2 = new WPI_VictorSPX(PortMap.PORT_5);
+       // driveTrainDriveTrainL2.setInverted(true);
         driveTrainDriveTrainL2.follow(driveTrainDriveTrainL1);
-        //driveTrainDriveTrainL2.set(ControlMode.Follower, driveTrainDriveTrainL1.getDeviceID());
         
-        driveTrainDriveTrainL3 = new WPI_VictorSPX(2);
-        /* CHANGED TO .follow */
+        driveTrainDriveTrainL3 = new WPI_VictorSPX(PortMap.PORT_4);
+       // driveTrainDriveTrainL3.setInverted(true);
         driveTrainDriveTrainL3.follow(driveTrainDriveTrainL1);
         
         
-        driveTrainDriveTrainR1 = new WPI_TalonSRX(3);
+        driveTrainDriveTrainR1 = new WPI_TalonSRX(PortMap.PORT_3);
         
-        driveTrainDriveTrainR2 = new WPI_VictorSPX(4);
-        /* CHANGED TO .follow */
+        driveTrainDriveTrainR2 = new WPI_VictorSPX(PortMap.PORT_2);
         driveTrainDriveTrainR2.follow(driveTrainDriveTrainR1);
         
-        driveTrainDriveTrainR3 = new WPI_VictorSPX(5);
-        /* CHANGED TO .follow */
+        driveTrainDriveTrainR3 = new WPI_VictorSPX(PortMap.PORT_1);
         driveTrainDriveTrainR3.follow(driveTrainDriveTrainR1);
+        
+        joystickControl = new DifferentialDrive(driveTrainDriveTrainL1, driveTrainDriveTrainR1);
     }
 }

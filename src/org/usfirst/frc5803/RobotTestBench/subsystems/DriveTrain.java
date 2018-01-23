@@ -16,6 +16,7 @@ import org.usfirst.frc5803.RobotTestBench.RobotMap;
 import org.usfirst.frc5803.RobotTestBench.commands.*;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
@@ -24,8 +25,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  */
 public class DriveTrain extends Subsystem {
 
-   WPI_TalonSRX L1 = RobotMap.driveTrainDriveTrainL1;
-   WPI_TalonSRX R1 = RobotMap.driveTrainDriveTrainR1;
+   public WPI_TalonSRX L1 = RobotMap.driveTrainDriveTrainL1;
+   public WPI_TalonSRX R1 = RobotMap.driveTrainDriveTrainR1;
+   private final DifferentialDrive joystickControl = RobotMap.joystickControl;
     @Override
     
     public void initDefaultCommand() {
@@ -36,12 +38,25 @@ public class DriveTrain extends Subsystem {
         // setDefaultCommand(new MySpecialCommand());
     }
 
+    public void configPIDF(double p, double i, double d, double f) {
 
+    	this.L1.config_kP(0, p, 0);
+    	this.L1.config_kI(0, i, 0);
+    	this.L1.config_kD(0, d, 0);
+    	this.L1.config_kF(0, f, 0);
+
+    	this.R1.config_kP(0, p, 0);
+    	this.R1.config_kI(0, i, 0);
+    	this.R1.config_kD(0, d, 0);
+    	this.R1.config_kF(0, f, 0);
+
+
+
+    }
     public void drive(double left, double right){
-
-    	this.L1.set(left);
-
-    	this.R1.set(right);
+   // 	this.L1.set(left);
+   // 	this.R1.set(right);
+    	joystickControl.arcadeDrive(left, right, true);
 
     }
 

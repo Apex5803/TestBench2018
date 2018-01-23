@@ -39,12 +39,18 @@ public class Drive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+<<<<<<< HEAD
     	boolean quickTurn = Robot.driveTrain.quickTurnController();
-    	double moveValue = Robot.oi.xbox.getY(Hand.kLeft);
-    	double rotateValue = Robot.oi.xbox.getX(Hand.kRight);
-    	DriveSignal driveSignal = helper.cheesyDrive(0.6 * moveValue, 0.4 * rotateValue, quickTurn, false);
-    	Robot.driveTrain.drive(driveSignal);
-    }
+=======
+
+ /*   	boolean quickTurn = Robot.driveTrain.quickTurnController();
+
+    	Robot.driveTrain.drivedriveSignal);
+*/
+		double move = Robot.oi.xbox.getY(Hand.kLeft);
+		double rotate = Robot.oi.xbox.getX(Hand.kRight);
+    	Robot.driveTrain.drive(move, -rotate);
+        }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
