@@ -4,7 +4,8 @@ public class PortMap {
 
 	public static final int PORT_0=0;
 	public static final int PORT_1=1;
-	public static final int PORT_3=2;
+	public static final int PORT_2=2;
+	public static final int PORT_3=3;
 	public static final int PORT_4=4;
 	public static final int PORT_5=5;
 	public static final int PORT_6=6;

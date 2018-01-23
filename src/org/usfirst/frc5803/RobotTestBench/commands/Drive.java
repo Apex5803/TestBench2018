@@ -73,7 +73,7 @@ public class Drive extends Command {
 
     protected void execute() {
 
-    	boolean quickTurn = Robot.driveTrain.quickTurnController();
+ /*   	boolean quickTurn = Robot.driveTrain.quickTurnController();
 
     	double moveValue = Robot.oi.xbox.getY(Hand.kLeft);
 
@@ -81,8 +81,12 @@ public class Drive extends Command {
 
     	DriveSignal driveSignal = helper.cheesyDrive(0.6 * moveValue, 0.4 * rotateValue, quickTurn, false);
 
-    	Robot.driveTrain.drive(driveSignal);
-
+    	Robot.driveTrain.drivedriveSignal);
+*/ 		double left = Robot.oi.xbox.getY(Hand.kLeft);
+		double right = Robot.oi.xbox.getX(Hand.kRight);
+    	Robot.driveTrain.drive(left, right);
+    	
+    	
     }
 
 
