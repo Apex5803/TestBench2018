@@ -13,92 +13,47 @@ package org.usfirst.frc5803.RobotTestBench.commands;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc5803.RobotTestBench.Robot;
-import org.usfirst.frc5803.RobotTestBench.subsystems.DriveTrain;
-/**
- *
- */
+//import org.usfirst.frc5803.RobotTestBench.subsystems.DriveTrain;
 import org.usfirst.frc5803.RobotTestBench.models.*;
-
-import org.usfirst.frc5803.RobotTestBench.Robot;
-
 import org.usfirst.frc5803.RobotTestBench.utils.*;
-
-
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-
-
-import edu.wpi.first.wpilibj.command.Command;
-
-
-
 /**
-
  *
-
  */
 
 public class Drive extends Command {
 
-
-
 	DriveHelper helper;
 
-	
-
     public Drive() {
-
     	requires(Robot.driveTrain);
-
     	helper = new DriveHelper();
-
         // Use requires() here to declare subsystem dependencies
-
         // eg. requires(chassis);
-
     }
-
-
 
     // Called just before this Command runs the first time
-
     protected void initialize() {
-
     }
-
-
 
     // Called repeatedly when this Command is scheduled to run
-
     protected void execute() {
-
     	boolean quickTurn = Robot.driveTrain.quickTurnController();
-
     	double moveValue = Robot.oi.xbox.getY(Hand.kLeft);
-
     	double rotateValue = Robot.oi.xbox.getX(Hand.kRight);
-
     	DriveSignal driveSignal = helper.cheesyDrive(0.6 * moveValue, 0.4 * rotateValue, quickTurn, false);
-
     	Robot.driveTrain.drive(driveSignal);
-
     }
 
-
-
     // Make this return true when this Command no longer needs to run execute()
-
     protected boolean isFinished() {
-
         return false;
-
     }
 
 
 
     // Called once after isFinished returns true
-
     protected void end() {
 
     }
@@ -106,9 +61,7 @@ public class Drive extends Command {
 
 
     // Called when another command which requires one or more of the same
-
     // subsystems is scheduled to run
-
     protected void interrupted() {
 
     }
