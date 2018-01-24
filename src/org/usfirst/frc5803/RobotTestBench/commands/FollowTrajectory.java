@@ -52,6 +52,7 @@ public class FollowTrajectory extends Command {
 	public FollowTrajectory(String trajectoryName) {
 		requires(Robot.driveTrain);
 		this.trajectoryName = trajectoryName;
+		
 	}
 
 	public FollowTrajectory(SrxTrajectory trajectoryToFollow) {
@@ -75,6 +76,7 @@ public class FollowTrajectory extends Command {
 			try 
 			{
 				this.trajectoryToFollow = importer.importSrxTrajectory(trajectoryName);
+				System.out.println("tried to import trajectory");
 			} 
 			catch (IOException | ParseException e) {
 				System.out.println("Failed to import trajectory.");
@@ -93,8 +95,8 @@ public class FollowTrajectory extends Command {
 	protected void execute() {
 		Robot.driveTrain.R1.getMotionProfileStatus(rightStatus);
 		Robot.driveTrain.L1.getMotionProfileStatus(leftStatus);
-		//System.out.println("Bottom buffer count: " + rightStatus.btmBufferCnt);
-		//System.out.println("Top buffer count: " + rightStatus.topBufferCnt);
+		System.out.println("Bottom buffer count: " + rightStatus.btmBufferCnt);
+		System.out.println("Top buffer count: " + rightStatus.topBufferCnt);
 
 		
 		if (rightStatus.isUnderrun || leftStatus.isUnderrun)
@@ -106,12 +108,14 @@ public class FollowTrajectory extends Command {
 		else if (rightStatus.btmBufferCnt > kMinPointsInTalon && leftStatus.btmBufferCnt > kMinPointsInTalon)
 		{
 			// if we have enough points in the talon, go.
+			System.out.println("should be going");
 			setValue = SetValueMotionProfile.Enable;
 		}	
 		else if (rightStatus.activePointValid && rightStatus.isLast && leftStatus.activePointValid
 				&& leftStatus.isLast)
 		{
 			// if both profiles are at their last points, hold the last point
+			System.out.println("im at the last point");
 			setValue = SetValueMotionProfile.Hold;
 		}
 		Robot.driveTrain.L1.set(ControlMode.MotionProfile, setValue.value);

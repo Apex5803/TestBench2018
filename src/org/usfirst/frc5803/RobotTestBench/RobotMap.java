@@ -35,7 +35,7 @@ public class RobotMap {
     public static void init() {        
         //LEFT DRIVE TRAIN
     	driveTrainDriveTrainL1 = new WPI_TalonSRX(PortMap.PORT_6);
-        // driveTrainDriveTrainL1.setInverted(true);
+         driveTrainDriveTrainL1.setInverted(true);
     	/* For 2018 robot encoders */
         //driveTrainDriveTrainL1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         /* For Failstorm */
@@ -45,12 +45,12 @@ public class RobotMap {
         driveTrainDriveTrainL1.setNeutralMode(NeutralMode.Coast);
         
         driveTrainDriveTrainL2 = new WPI_VictorSPX(PortMap.PORT_5);
-        // driveTrainDriveTrainL2.setInverted(true);
+         driveTrainDriveTrainL2.setInverted(true);
         driveTrainDriveTrainL2.follow(driveTrainDriveTrainL1);
         driveTrainDriveTrainL2.setNeutralMode(NeutralMode.Coast);
 
         driveTrainDriveTrainL3 = new WPI_VictorSPX(PortMap.PORT_4);
-        // driveTrainDriveTrainL3.setInverted(true);
+        driveTrainDriveTrainL3.setInverted(true);
         driveTrainDriveTrainL3.follow(driveTrainDriveTrainL1);
         driveTrainDriveTrainL3.setNeutralMode(NeutralMode.Coast);
 
@@ -73,7 +73,7 @@ public class RobotMap {
         
         joystickControl = new DifferentialDrive(driveTrainDriveTrainL1, driveTrainDriveTrainR1);
         
-
+        //anything I put here doesn't matter so...I'm going to ramble until I run out of room. this is a comment put here for no reason other than pure randomness and serves no use to the robot or programmers whatsoever. By now you probably realized you just wasted your time and your  probably annoyed. If not the are you even human?!
         SmartDashboard.putNumber("Left Encoder Position", driveTrainDriveTrainL1.getSelectedSensorPosition(0));
         SmartDashboard.putNumber("Left Encoder Velocity", driveTrainDriveTrainL1.getSelectedSensorPosition(0));
         SmartDashboard.putNumber("Right Encoder Position", driveTrainDriveTrainR1.getSelectedSensorPosition(0));

@@ -3,6 +3,7 @@ package org.usfirst.frc5803.RobotTestBench.subsystems;
 import org.usfirst.frc5803.RobotTestBench.Robot;
 import org.usfirst.frc5803.RobotTestBench.models.*;
 import org.usfirst.frc5803.RobotTestBench.RobotMap;
+import org.usfirst.frc5803.RobotTestBench.commands.Drive;
 import org.usfirst.frc5803.RobotTestBench.commands.DriveVelocityPIDTest;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -16,6 +17,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 /**
  *
  */
+
 public class DriveTrain extends Subsystem {
 
    public WPI_TalonSRX L1 = RobotMap.driveTrainDriveTrainL1;
@@ -27,8 +29,8 @@ public class DriveTrain extends Subsystem {
    @Override
    public void initDefaultCommand() {
 	   //TODO make sure this is set to how you want to drive, or what you want to test
-    	//setDefaultCommand(new Drive());
-	   setDefaultCommand(new DriveVelocityPIDTest());
+    	setDefaultCommand(new Drive());
+	   //setDefaultCommand(new DriveVelocityPIDTest());
 	   
     }
 
@@ -84,17 +86,17 @@ public class DriveTrain extends Subsystem {
 		double motorOutputR = _talonR.getMotorOutputPercent();
 	    	
 		/* prepare line to print */
-		_sb.append("\tout:");
+		_sb.append("\toutL:");
 		_sb.append(motorOutputL);
-		_sb.append("\tspd:");
+		_sb.append("\tspdL:");
 		_sb.append(_talonL.getSelectedSensorVelocity(0));
 		_sb.append("\n");
 		
 		/* prepare next line to print */
-		_sb.append("\tout:");
+		_sb.append("\toutR:");
 		_sb.append(motorOutputR);
-		_sb.append("\tspd:");
-		_sb.append(_talonL.getSelectedSensorVelocity(0));
+		_sb.append("\tspdR:");
+		_sb.append(_talonR.getSelectedSensorVelocity(0));
 		_sb.append("\n");
 	
 		if (Robot.oi.xbox.getAButton()) { //Run left drive
@@ -109,9 +111,9 @@ public class DriveTrain extends Subsystem {
 			_talonL.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
 	
 			/* append more signals to print when in speed mode for left side. */
-			_sb.append("\terr:");
+			_sb.append("\terrl:");
 			_sb.append(_talonL.getClosedLoopError(0));
-			_sb.append("\ttrg:");
+			_sb.append("\ttrgl:");
 			_sb.append(targetVelocity_UnitsPer100ms);
 			//_sb.append("\n");
 		} 
@@ -124,13 +126,13 @@ public class DriveTrain extends Subsystem {
 			//double targetVelocity_UnitsPer100ms = -1 * 210.0 * 4096 / 600;
 			double targetVelocity_UnitsPer100ms = -1 * 210.0 * 1024 / 600; //TODO modified to 1024 for quad encoders on failstorm
 			/* 500 RPM in either direction */
-			_talonL.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
+			//_talonL.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
 			_talonR.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
 	
 			/* append more signals to print when in speed mode for right side. */
-			_sb.append("\terr:");
+			_sb.append("\terrR:");
 			_sb.append(_talonR.getClosedLoopError(0));
-			_sb.append("\ttrg:");
+			_sb.append("\ttrgR:");
 			_sb.append(targetVelocity_UnitsPer100ms);
 			//_sb.append("\n");
 		}
