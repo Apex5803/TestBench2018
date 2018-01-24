@@ -11,8 +11,8 @@
 package org.usfirst.frc5803.RobotTestBench;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,18 +23,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * floating around.
  */
 public class RobotMap {
-    public static WPI_TalonSRX driveTrainDriveTrainL1;
-    public static WPI_VictorSPX driveTrainDriveTrainL2;
-    public static WPI_VictorSPX driveTrainDriveTrainL3;
-    public static WPI_TalonSRX driveTrainDriveTrainR1;
-    public static WPI_VictorSPX driveTrainDriveTrainR2;
-    public static WPI_VictorSPX driveTrainDriveTrainR3;
+    public static TalonSRX driveTrainDriveTrainL1;
+    public static VictorSPX driveTrainDriveTrainL2;
+    public static VictorSPX driveTrainDriveTrainL3;
+    public static TalonSRX driveTrainDriveTrainR1;
+    public static VictorSPX driveTrainDriveTrainR2;
+    public static VictorSPX driveTrainDriveTrainR3;
     public static DifferentialDrive joystickControl;
 
 
     public static void init() {        
         //LEFT DRIVE TRAIN
-    	driveTrainDriveTrainL1 = new WPI_TalonSRX(PortMap.PORT_6);
+    	driveTrainDriveTrainL1 = new TalonSRX(PortMap.PORT_6);
          driveTrainDriveTrainL1.setInverted(true);
     	/* For 2018 robot encoders */
         //driveTrainDriveTrainL1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
@@ -44,18 +44,18 @@ public class RobotMap {
         driveTrainDriveTrainL1.setSensorPhase(false); //set direction of encoder
         driveTrainDriveTrainL1.setNeutralMode(NeutralMode.Coast);
         
-        driveTrainDriveTrainL2 = new WPI_VictorSPX(PortMap.PORT_5);
+        driveTrainDriveTrainL2 = new VictorSPX(PortMap.PORT_5);
          driveTrainDriveTrainL2.setInverted(true);
         driveTrainDriveTrainL2.follow(driveTrainDriveTrainL1);
         driveTrainDriveTrainL2.setNeutralMode(NeutralMode.Coast);
 
-        driveTrainDriveTrainL3 = new WPI_VictorSPX(PortMap.PORT_4);
+        driveTrainDriveTrainL3 = new VictorSPX(PortMap.PORT_4);
         driveTrainDriveTrainL3.setInverted(true);
         driveTrainDriveTrainL3.follow(driveTrainDriveTrainL1);
         driveTrainDriveTrainL3.setNeutralMode(NeutralMode.Coast);
 
         //RIGHT DRIVE TRAIN
-        driveTrainDriveTrainR1 = new WPI_TalonSRX(PortMap.PORT_3);
+        driveTrainDriveTrainR1 = new TalonSRX(PortMap.PORT_3);
         /* For 2018 robot encoders */
         //driveTrainDriveTrainR1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         /* For Failstorm */
@@ -63,17 +63,16 @@ public class RobotMap {
         driveTrainDriveTrainR1.setSensorPhase(false); //set direction of sensor
         driveTrainDriveTrainR1.setNeutralMode(NeutralMode.Coast);
         
-        driveTrainDriveTrainR2 = new WPI_VictorSPX(PortMap.PORT_2);
+        driveTrainDriveTrainR2 = new VictorSPX(PortMap.PORT_2);
         driveTrainDriveTrainR2.follow(driveTrainDriveTrainR1);
         driveTrainDriveTrainR2.setNeutralMode(NeutralMode.Coast);
 
-        driveTrainDriveTrainR3 = new WPI_VictorSPX(PortMap.PORT_1);
+        driveTrainDriveTrainR3 = new VictorSPX(PortMap.PORT_1);
         driveTrainDriveTrainR3.follow(driveTrainDriveTrainR1);
         driveTrainDriveTrainR3.setNeutralMode(NeutralMode.Coast);
         
-        joystickControl = new DifferentialDrive(driveTrainDriveTrainL1, driveTrainDriveTrainR1);
+        //joystickControl = new DifferentialDrive(driveTrainDriveTrainL1, driveTrainDriveTrainR1);
         
-        //anything I put here doesn't matter so...I'm going to ramble until I run out of room. this is a comment put here for no reason other than pure randomness and serves no use to the robot or programmers whatsoever. By now you probably realized you just wasted your time and your  probably annoyed. If not the are you even human?!
         SmartDashboard.putNumber("Left Encoder Position", driveTrainDriveTrainL1.getSelectedSensorPosition(0));
         SmartDashboard.putNumber("Left Encoder Velocity", driveTrainDriveTrainL1.getSelectedSensorPosition(0));
         SmartDashboard.putNumber("Right Encoder Position", driveTrainDriveTrainR1.getSelectedSensorPosition(0));

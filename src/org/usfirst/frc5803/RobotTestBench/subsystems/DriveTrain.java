@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
@@ -19,9 +20,11 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  */
 
 public class DriveTrain extends Subsystem {
-
-   public WPI_TalonSRX L1 = RobotMap.driveTrainDriveTrainL1;
-   public WPI_TalonSRX R1 = RobotMap.driveTrainDriveTrainR1;
+	public TalonSRX L1 = RobotMap.driveTrainDriveTrainL1;
+	public TalonSRX R1 = RobotMap.driveTrainDriveTrainR1;
+	
+	//public WPI_TalonSRX L1 = RobotMap.driveTrainDriveTrainL1;
+    //public WPI_TalonSRX R1 = RobotMap.driveTrainDriveTrainR1;
    private final DifferentialDrive joystickControl = RobotMap.joystickControl;
    StringBuilder _sb = new StringBuilder();
    int _loops = 0;
@@ -47,17 +50,17 @@ public class DriveTrain extends Subsystem {
     	this.R1.config_kF(0, f, 0);
     }
     
-    public void drive(double move, double rotate){
-   // 	this.L1.set(left);
-   // 	this.R1.set(right);
-    	joystickControl.arcadeDrive(move, rotate, true);
+    public void drive(double left, double right){
+    	this.L1.set(ControlMode.PercentOutput, left);
+    	this.R1.set(ControlMode.PercentOutput, right);
+    	//joystickControl.arcadeDrive(move, rotate, true);
 
     }
     /**** NEW METHOD FOR DRIVING PATHS ****/
     //TODO do we need this? I don't think we actually do
     public void drivePath(double left, double right) {
-     	this.L1.set(left);
-    	this.R1.set(right);    	    	
+     	this.L1.set(ControlMode.PercentOutput, left);
+    	this.R1.set(ControlMode.PercentOutput, right);    	    	
     }
 
     public void drive(DriveSignal driveSignal) {
@@ -78,8 +81,11 @@ public class DriveTrain extends Subsystem {
     }
     
 	public void velocityPIDTest() {	
-		WPI_TalonSRX _talonL = this.L1;
-		WPI_TalonSRX _talonR = this.R1;
+		//WPI_TalonSRX _talonL = this.L1;
+		//WPI_TalonSRX _talonR = this.R1;
+		TalonSRX _talonL = this.L1;
+		TalonSRX _talonR = this.R1;
+		
 		double leftYstick = Robot.oi.xbox.getY(Hand.kLeft);
 		double rightYstick = Robot.oi.xbox.getY(Hand.kRight);
 		double motorOutputL = _talonL.getMotorOutputPercent();
