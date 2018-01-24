@@ -79,7 +79,9 @@ public class Robot extends TimedRobot {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     */
-    	new DriveForwardFiveFeet();
+    	autonomousCommand = new DriveForwardFiveFeet();
+        // schedule the autonomous command (example)
+        if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**
@@ -87,7 +89,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
+    	Scheduler.getInstance().run();
+
     }
 
     @Override

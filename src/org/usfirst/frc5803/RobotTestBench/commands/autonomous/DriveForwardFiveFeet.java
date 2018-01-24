@@ -25,7 +25,7 @@ public class DriveForwardFiveFeet extends CommandGroup {
     			e.printStackTrace();
     		}
         	
-        	addSequential(new FollowTrajectory(toFollow));
+        	addSequential(new FollowTrajectory("ThreeFeet"));
     }
 }
 

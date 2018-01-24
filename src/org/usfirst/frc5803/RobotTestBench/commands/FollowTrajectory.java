@@ -52,7 +52,7 @@ public class FollowTrajectory extends Command {
 	public FollowTrajectory(String trajectoryName) {
 		requires(Robot.driveTrain);
 		this.trajectoryName = trajectoryName;
-		
+		System.out.println("Following :" + trajectoryName);
 	}
 
 	public FollowTrajectory(SrxTrajectory trajectoryToFollow) {
@@ -71,12 +71,14 @@ public class FollowTrajectory extends Command {
 		Robot.driveTrain.R1.set(ControlMode.MotionProfile, setValue.value);
 
 		SrxNotifier.startPeriodic(.005);
+		
+		System.out.println("initializing FollowTrajectory");
 
-		if(trajectoryToFollow == null) {
+
 			try 
 			{
-				this.trajectoryToFollow = importer.importSrxTrajectory(trajectoryName);
 				System.out.println("tried to import trajectory");
+				this.trajectoryToFollow = importer.importSrxTrajectory(trajectoryName);
 			} 
 			catch (IOException | ParseException e) {
 				System.out.println("Failed to import trajectory.");
@@ -84,7 +86,7 @@ public class FollowTrajectory extends Command {
 				isFinished = true;
 				return;
 			}
-		}
+		
 		
 	//	int pidfSlot = Robot.driveTrain.HIGH_GEAR_PROFILE;
 		fillTalonBuffer(Robot.driveTrain.R1, this.trajectoryToFollow.rightProfile, 0);
