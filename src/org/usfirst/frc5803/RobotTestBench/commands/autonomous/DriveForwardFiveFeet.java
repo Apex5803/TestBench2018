@@ -16,16 +16,15 @@ public class DriveForwardFiveFeet extends CommandGroup {
 	SrxTrajectoryImporter importer = new SrxTrajectoryImporter("/home/lvuser/Autos");
 	SrxTrajectory toFollow = null;
     public DriveForwardFiveFeet() {
-    	/* Yes this is confusing, this path is set to drive forward five feet */
         	try {
-    			this.toFollow = importer.importSrxTrajectory("ThreeFeet");
-    			System.out.println("import" + this.toFollow); 
+    			this.toFollow = importer.importSrxTrajectory("FiveFeet");
+    			//System.out.println("import" + this.toFollow); 
     		} catch (IOException | ParseException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
         	
-        	addSequential(new FollowTrajectory("ThreeFeet"));
+        	addSequential(new FollowTrajectory("FiveFeet"));
     }
 }
 
