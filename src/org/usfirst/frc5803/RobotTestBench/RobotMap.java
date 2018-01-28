@@ -13,6 +13,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -30,6 +32,7 @@ public class RobotMap {
     public static VictorSPX driveTrainDriveTrainR2;
     public static VictorSPX driveTrainDriveTrainR3;
     public static DifferentialDrive joystickControl;
+    public static Compressor compressor;
 
 
     public static void init() {        
@@ -37,9 +40,9 @@ public class RobotMap {
     	driveTrainDriveTrainL1 = new TalonSRX(PortMap.PORT_6);
          driveTrainDriveTrainL1.setInverted(true);
     	/* For 2018 robot encoders */
-        //driveTrainDriveTrainL1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+        driveTrainDriveTrainL1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         /* For Failstorm */
-        driveTrainDriveTrainL1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+       // driveTrainDriveTrainL1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         //driveTrainDriveTrainL1.configEncoderCodesPerRev(256);
         driveTrainDriveTrainL1.setSensorPhase(false); //set direction of encoder
         driveTrainDriveTrainL1.setNeutralMode(NeutralMode.Coast);
@@ -57,9 +60,9 @@ public class RobotMap {
         //RIGHT DRIVE TRAIN
         driveTrainDriveTrainR1 = new TalonSRX(PortMap.PORT_3);
         /* For 2018 robot encoders */
-        //driveTrainDriveTrainR1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+        driveTrainDriveTrainR1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         /* For Failstorm */
-        driveTrainDriveTrainR1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        //driveTrainDriveTrainR1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         driveTrainDriveTrainR1.setSensorPhase(false); //set direction of sensor
         driveTrainDriveTrainR1.setNeutralMode(NeutralMode.Coast);
         
@@ -73,10 +76,10 @@ public class RobotMap {
         
         //joystickControl = new DifferentialDrive(driveTrainDriveTrainL1, driveTrainDriveTrainR1);
         
-        SmartDashboard.putNumber("Left Encoder Position", driveTrainDriveTrainL1.getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("Left Encoder Velocity", driveTrainDriveTrainL1.getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("Right Encoder Position", driveTrainDriveTrainR1.getSelectedSensorPosition(0));
-        SmartDashboard.putNumber("Right Encoder Velocity", driveTrainDriveTrainR1.getSelectedSensorPosition(0));
+       // SmartDashboard.putNumber("Left Encoder Position", driveTrainDriveTrainL1.getSelectedSensorPosition(0));
+       // SmartDashboard.putNumber("Left Encoder Velocity", driveTrainDriveTrainL1.getSelectedSensorPosition(0));
+       // SmartDashboard.putNumber("Right Encoder Position", driveTrainDriveTrainR1.getSelectedSensorPosition(0));
+       // SmartDashboard.putNumber("Right Encoder Velocity", driveTrainDriveTrainR1.getSelectedSensorPosition(0));
 
     }
 }
