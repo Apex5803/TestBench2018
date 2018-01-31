@@ -13,7 +13,10 @@ package org.usfirst.frc5803.RobotTestBench.commands;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc5803.RobotTestBench.Robot;
+import org.usfirst.frc5803.RobotTestBench.models.DriveSignal;
 import org.usfirst.frc5803.RobotTestBench.utils.*;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 /**
  *
@@ -43,8 +46,10 @@ public class Drive extends Command {
 */
 		double move = Robot.oi.xbox.getY(Hand.kLeft);
 		double rotate = Robot.oi.xbox.getX(Hand.kRight);
+		boolean quickTurn = Robot.driveTrain.quickTurnController(); 
+		DriveSignal driveSignal = helper.cheesyDrive(0.6 * move, 0.4 * rotate, quickTurn, false);
 		//TODO add this fix for making the robot turn the correct direction in teleop
-    	Robot.driveTrain.drive(move, -rotate);
+    	Robot.driveTrain.drive(ControlMode.PercentOutput, driveSignal);
         }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -50,9 +50,9 @@ public class DriveTrain extends Subsystem {
     	this.R1.config_kF(0, f, 0);
     }
     
-    public void drive(double left, double right){
-    	this.L1.set(ControlMode.PercentOutput, left);
-    	this.R1.set(ControlMode.PercentOutput, right);
+    public void drive(ControlMode controlMode, double left, double right){
+    	this.L1.set(controlMode, left);
+    	this.R1.set(controlMode, right);
     	//joystickControl.arcadeDrive(move, rotate, true);
 
     }
@@ -63,11 +63,11 @@ public class DriveTrain extends Subsystem {
     	this.R1.set(ControlMode.PercentOutput, right);    	    	
     }
 
-    public void drive(DriveSignal driveSignal) {
+    public void drive(ControlMode controlMode, DriveSignal driveSignal) {
 
     	//System.out.println(driveSignal.toString());
 
-    	this.drive(driveSignal.getLeft(), driveSignal.getRight());
+    	this.drive(controlMode, driveSignal.getLeft(), driveSignal.getRight());
 
     }
 
