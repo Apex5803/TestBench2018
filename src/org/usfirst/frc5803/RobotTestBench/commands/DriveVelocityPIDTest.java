@@ -1,6 +1,6 @@
 package org.usfirst.frc5803.RobotTestBench.commands;
 
-import org.usfirst.frc5803.RobotTestBench.Robot;
+import org.usfirst.frc5803.RobotTestBench.robotold;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 	    public DriveVelocityPIDTest() {
 	        // Use requires() here to declare subsystem dependencies
-	        requires(Robot.driveTrain);
+	        requires(robotold.driveTrain);
 	    }
 
 	    // Called just before this Command runs the first time
@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 	    // Called repeatedly when this Command is scheduled to run
 	    protected void execute() {
-	    	Robot.driveTrain.velocityPIDTest();
+	    	robotold.driveTrain.velocityPIDTest();
 	    }
 
 	    // Make this return true when this Command no longer needs to run execute()

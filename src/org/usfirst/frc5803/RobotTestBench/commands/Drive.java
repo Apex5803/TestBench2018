@@ -12,7 +12,7 @@
 package org.usfirst.frc5803.RobotTestBench.commands;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc5803.RobotTestBench.Robot;
+import org.usfirst.frc5803.RobotTestBench.robotold;
 import org.usfirst.frc5803.RobotTestBench.utils.*;
 
 /**
@@ -24,7 +24,7 @@ public class Drive extends Command {
 	DriveHelper helper;
 
     public Drive() {
-    	requires(Robot.driveTrain);
+    	requires(robotold.driveTrain);
     	helper = new DriveHelper();
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -41,10 +41,10 @@ public class Drive extends Command {
 
     	Robot.driveTrain.drivedriveSignal);
 */
-		double move = Robot.oi.xbox.getY(Hand.kLeft);
-		double rotate = Robot.oi.xbox.getX(Hand.kRight);
+		double move = robotold.oi.xbox.getY(Hand.kLeft);
+		double rotate = robotold.oi.xbox.getX(Hand.kRight);
 		//TODO add this fix for making the robot turn the correct direction in teleop
-    	Robot.driveTrain.drive(move, -rotate);
+    	robotold.driveTrain.drive(move, -rotate);
         }
 
     // Make this return true when this Command no longer needs to run execute()
