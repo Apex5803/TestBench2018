@@ -56,7 +56,7 @@ public class RobotMap {
         driveTrainDriveTrainL3.setInverted(true);
         driveTrainDriveTrainL3.follow(driveTrainDriveTrainL1);
         driveTrainDriveTrainL3.setNeutralMode(NeutralMode.Coast);
-
+        
         //RIGHT DRIVE TRAIN
         driveTrainDriveTrainR1 = new TalonSRX(PortMap.PORT_3);
         /* For 2018 robot encoders */

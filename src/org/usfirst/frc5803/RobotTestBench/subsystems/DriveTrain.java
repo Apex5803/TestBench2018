@@ -163,7 +163,7 @@ public class DriveTrain extends Subsystem {
     }
 	
 	public void End() {
-		Robot.driveTrain.drive(0,0);
+		Robot.driveTrain.drive(ControlMode.PercentOutput, 0,0);
 	}
 
     // Put methods for controlling this subsystem
