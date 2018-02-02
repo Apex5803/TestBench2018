@@ -37,7 +37,7 @@ public class RobotMap {
 
     public static void init() {        
         //LEFT DRIVE TRAIN
-    	driveTrainDriveTrainL1 = new TalonSRX(PortMap.PORT_6);
+    	driveTrainDriveTrainL1 = new TalonSRX(PortMap.PORT_0);
          driveTrainDriveTrainL1.setInverted(true);
     	/* For 2018 robot encoders */
         driveTrainDriveTrainL1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
@@ -47,18 +47,18 @@ public class RobotMap {
         driveTrainDriveTrainL1.setSensorPhase(false); //set direction of encoder
         driveTrainDriveTrainL1.setNeutralMode(NeutralMode.Coast);
         
-        driveTrainDriveTrainL2 = new VictorSPX(PortMap.PORT_5);
+        driveTrainDriveTrainL2 = new VictorSPX(PortMap.PORT_0);
          driveTrainDriveTrainL2.setInverted(true);
         driveTrainDriveTrainL2.follow(driveTrainDriveTrainL1);
         driveTrainDriveTrainL2.setNeutralMode(NeutralMode.Coast);
 
-        driveTrainDriveTrainL3 = new VictorSPX(PortMap.PORT_4);
+        driveTrainDriveTrainL3 = new VictorSPX(PortMap.PORT_2);
         driveTrainDriveTrainL3.setInverted(true);
         driveTrainDriveTrainL3.follow(driveTrainDriveTrainL1);
         driveTrainDriveTrainL3.setNeutralMode(NeutralMode.Coast);
         
         //RIGHT DRIVE TRAIN
-        driveTrainDriveTrainR1 = new TalonSRX(PortMap.PORT_3);
+        driveTrainDriveTrainR1 = new TalonSRX(PortMap.PORT_1);
         /* For 2018 robot encoders */
         driveTrainDriveTrainR1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
         /* For Failstorm */
@@ -66,11 +66,11 @@ public class RobotMap {
         driveTrainDriveTrainR1.setSensorPhase(false); //set direction of sensor
         driveTrainDriveTrainR1.setNeutralMode(NeutralMode.Coast);
         
-        driveTrainDriveTrainR2 = new VictorSPX(PortMap.PORT_2);
+        driveTrainDriveTrainR2 = new VictorSPX(PortMap.PORT_1);
         driveTrainDriveTrainR2.follow(driveTrainDriveTrainR1);
         driveTrainDriveTrainR2.setNeutralMode(NeutralMode.Coast);
 
-        driveTrainDriveTrainR3 = new VictorSPX(PortMap.PORT_1);
+        driveTrainDriveTrainR3 = new VictorSPX(PortMap.PORT_3);
         driveTrainDriveTrainR3.follow(driveTrainDriveTrainR1);
         driveTrainDriveTrainR3.setNeutralMode(NeutralMode.Coast);
         

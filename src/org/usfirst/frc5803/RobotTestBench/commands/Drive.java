@@ -47,7 +47,7 @@ public class Drive extends Command {
 		double move = Robot.oi.xbox.getY(Hand.kLeft);
 		double rotate = Robot.oi.xbox.getX(Hand.kRight);
 		boolean quickTurn = Robot.driveTrain.quickTurnController(); 
-		DriveSignal driveSignal = helper.cheesyDrive(0.6 * move, 0.4 * rotate, quickTurn, false);
+		DriveSignal driveSignal = helper.cheesyDrive(0.6 * move, 0.4 * -rotate, quickTurn, false);
 		//TODO add this fix for making the robot turn the correct direction in teleop
     	Robot.driveTrain.drive(ControlMode.PercentOutput, driveSignal);
         }
