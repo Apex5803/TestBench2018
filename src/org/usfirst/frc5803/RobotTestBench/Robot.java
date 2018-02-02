@@ -80,15 +80,21 @@ public class Robot extends IterativeRobot {
 
 		if (_joy.getRawButton(1)) {
 			/* Motion Magic - 4096 ticks/rev * 10 Rotations in either direction */
-			double targetPos = leftYstick * 4096 * 10.0;
+			double targetPos = 8 * 4096;
 			_talon.set(ControlMode.MotionMagic, targetPos);
 
 			/* append more signals to print when in speed mode. */
 			_sb.append("\terr:");
-			_sb.append(_talon.getClosedLoopTarget(Constants.kPIDLoopIdx));
+			_sb.append(_talon.getClosedLoopError(Constants.kPIDLoopIdx));
 			_sb.append("\ttrg:");
 			_sb.append(targetPos);
-		} else {
+		} 
+		else if (_joy.getRawButton(2)){
+			double targetPos = 5 * 4096;
+			_talon.set(ControlMode.MotionMagic, targetPos);
+	
+		}
+		else {
 			/* Percent voltage mode */
 			_talon.set(ControlMode.PercentOutput, leftYstick);
 		}
