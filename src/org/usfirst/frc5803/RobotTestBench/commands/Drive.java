@@ -42,7 +42,7 @@ public class Drive extends Command {
     	Robot.driveTrain.drivedriveSignal);
 */
 		double move = Robot.oi.xbox.getY(Hand.kLeft);
-		double rotate = Robot.oi.xbox.getX(Hand.kRight);
+		double rotate = Robot.oi.xbox.getY(Hand.kRight);
 		//TODO add this fix for making the robot turn the correct direction in teleop
     	Robot.driveTrain.drive(move, -rotate);
         }

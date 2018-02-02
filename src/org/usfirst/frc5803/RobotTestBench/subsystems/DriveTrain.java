@@ -51,9 +51,20 @@ public class DriveTrain extends Subsystem {
     }
     
     public void drive(double left, double right){
-    	this.L1.set(ControlMode.PercentOutput, left);
-    	this.R1.set(ControlMode.PercentOutput, right);
-    	//joystickControl.arcadeDrive(move, rotate, true);
+    	
+    	if(left < .2 && left > -0.2){
+    		this.L1.set(ControlMode.PercentOutput, 0);
+    	}
+    	else{
+    		this.L1.set(ControlMode.PercentOutput, left);	
+    	}
+    	
+    	if(right < 0.2 && right > -0.2){
+        	this.R1.set(ControlMode.PercentOutput, right);    		
+    	}
+    	else{
+        	this.R1.set(ControlMode.PercentOutput, right);	
+    	}//joystickControl.arcadeDrive(move, rotate, true);
 
     }
     /**** NEW METHOD FOR DRIVING PATHS ****/
