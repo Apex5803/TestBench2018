@@ -7,10 +7,7 @@
 
 package org.usfirst.frc5803.RobotTestBench.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc5803.RobotTestBench.robotold2;
-import org.usfirst.frc5803.RobotTestBench.subsystems.Arm;
 import org.usfirst.frc5803.RobotTestBench.Robot;
 
 /**
@@ -18,7 +15,6 @@ import org.usfirst.frc5803.RobotTestBench.Robot;
  */
 public class MoveArmToAngle extends Command {
 	private double angle;
-    StringBuilder _sb = new StringBuilder();
 
 	public MoveArmToAngle(double setAngle) {
 		// Use requires() here to declare subsystem dependencies
@@ -42,7 +38,7 @@ public class MoveArmToAngle extends Command {
 	protected boolean isFinished() {
 		double movevalue = Robot.arm.vgiver();
 		double targetvalue=this.angle*4096/360;
-		_sb.append("I'm not finished, value: " + movevalue + "target: " + targetvalue);
+		System.out.println("In isFinished() before check, value: " + movevalue + "target: " + targetvalue);
 
 		if((targetvalue+10)<movevalue || movevalue<(targetvalue-10)) {
 			System.out.println("I'm not finished, value: " + movevalue + "target: " + targetvalue);
