@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import java.io.IOException;
 import org.json.simple.parser.ParseException;
 //import org.usfirst.frc5803.robot.Robot;
-import org.usfirst.frc5803.RobotTestBench.robotold;
+import org.usfirst.frc5803.RobotTestBench.Robot;
 import org.usfirst.frc5803.RobotTestBench.models.*;
 import org.usfirst.frc5803.RobotTestBench.utils.*;
 import com.ctre.phoenix.motion.MotionProfileStatus;
@@ -40,8 +40,8 @@ public class FollowTrajectory extends Command {
 	// periodically tells the SRXs to do the thing
 	private class PeriodicRunnable implements java.lang.Runnable {
 		public void run() {
-			robotold.driveTrain.L1.processMotionProfileBuffer();
-			robotold.driveTrain.R1.processMotionProfileBuffer();
+			Robot.driveTrain.L1.processMotionProfileBuffer();
+			Robot.driveTrain.R1.processMotionProfileBuffer();
 		}
 	}
 
@@ -50,25 +50,25 @@ public class FollowTrajectory extends Command {
 
 	// constructor
 	public FollowTrajectory(String trajectoryName) {
-		requires(robotold.driveTrain);
+		requires(Robot.driveTrain);
 		this.trajectoryName = trajectoryName;
 		System.out.println("Following :" + trajectoryName);
 	}
 
 	public FollowTrajectory(SrxTrajectory trajectoryToFollow) {
-		requires(robotold.driveTrain);
+		requires(Robot.driveTrain);
 		this.trajectoryToFollow = trajectoryToFollow;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		setUpTalon(robotold.driveTrain.R1);
-		setUpTalon(robotold.driveTrain.L1);
+		setUpTalon(Robot.driveTrain.R1);
+		setUpTalon(Robot.driveTrain.L1);
 
 		setValue = SetValueMotionProfile.Disable;
 		
-		robotold.driveTrain.L1.set(ControlMode.MotionProfile, setValue.value);
-		robotold.driveTrain.R1.set(ControlMode.MotionProfile, setValue.value);
+		Robot.driveTrain.L1.set(ControlMode.MotionProfile, setValue.value);
+		Robot.driveTrain.R1.set(ControlMode.MotionProfile, setValue.value);
 
 		SrxNotifier.startPeriodic(.005);
 		
@@ -89,14 +89,14 @@ public class FollowTrajectory extends Command {
 		
 		
 	//	int pidfSlot = Robot.driveTrain.HIGH_GEAR_PROFILE;
-		fillTalonBuffer(robotold.driveTrain.R1, this.trajectoryToFollow.rightProfile, 0);
-		fillTalonBuffer(robotold.driveTrain.L1, this.trajectoryToFollow.leftProfile, 0);
+		fillTalonBuffer(Robot.driveTrain.R1, this.trajectoryToFollow.rightProfile, 0);
+		fillTalonBuffer(Robot.driveTrain.L1, this.trajectoryToFollow.leftProfile, 0);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		robotold.driveTrain.R1.getMotionProfileStatus(rightStatus);
-		robotold.driveTrain.L1.getMotionProfileStatus(leftStatus);
+		Robot.driveTrain.R1.getMotionProfileStatus(rightStatus);
+		Robot.driveTrain.L1.getMotionProfileStatus(leftStatus);
 	//	System.out.println("Bottom buffer count: " + rightStatus.btmBufferCnt);
 	//	System.out.println("Top buffer count: " + rightStatus.topBufferCnt);
 
@@ -120,8 +120,8 @@ public class FollowTrajectory extends Command {
 			//System.out.println("im at the last point");
 			setValue = SetValueMotionProfile.Hold;
 		}
-		robotold.driveTrain.L1.set(ControlMode.MotionProfile, setValue.value);
-		robotold.driveTrain.R1.set(ControlMode.MotionProfile, setValue.value);
+		Robot.driveTrain.L1.set(ControlMode.MotionProfile, setValue.value);
+		Robot.driveTrain.R1.set(ControlMode.MotionProfile, setValue.value);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -135,16 +135,16 @@ public class FollowTrajectory extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		SrxNotifier.stop();
-		resetTalon(robotold.driveTrain.R1, ControlMode.PercentOutput, 0);
-		resetTalon(robotold.driveTrain.L1, ControlMode.PercentOutput, 0);
+		resetTalon(Robot.driveTrain.R1, ControlMode.PercentOutput, 0);
+		resetTalon(Robot.driveTrain.L1, ControlMode.PercentOutput, 0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
 		SrxNotifier.stop();
-		resetTalon(robotold.driveTrain.R1, ControlMode.PercentOutput, 0);
-		resetTalon(robotold.driveTrain.L1, ControlMode.PercentOutput, 0);
+		resetTalon(Robot.driveTrain.R1, ControlMode.PercentOutput, 0);
+		resetTalon(Robot.driveTrain.L1, ControlMode.PercentOutput, 0);
 	}	
 
 	// set up the talon for motion profile control

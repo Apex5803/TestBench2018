@@ -4,6 +4,8 @@ import org.usfirst.frc5803.RobotTestBench.commands.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 /**
@@ -38,17 +40,30 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 
-
+//#victors are victims 
     public Joystick joystickL;
     public XboxController xbox;
 
     public OI() {
-
-        joystickL = new Joystick(1);
+       
         xbox = new XboxController(0);
-
-
-        // SmartDashboard Buttons
+        //pickup angle
+        Button A=new JoystickButton(xbox,1);
+        A.whenPressed(new MoveArmToAngle(6));
+        //climb angle
+        Button B=new JoystickButton(xbox,2);
+        B.whenPressed(new MoveArmToAngle(90));
+        //switch angle
+        Button X=new JoystickButton(xbox,3);
+        X.whenPressed(new MoveArmToAngle(45));
+        //shoot on scale angle
+        Button Y=new JoystickButton(xbox,4);
+        Y.whenPressed(new MoveArmToAngle(75));
+        //place on scale angle
+        Button R1=new JoystickButton(xbox,5);
+        R1.whenPressed(new MoveArmToAngle(110));
+      // SmartDashboard Buttons
+        //
         SmartDashboard.putData("Drive", new Drive());
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("other auto", new AutonomousCommand());

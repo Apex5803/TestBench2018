@@ -11,7 +11,7 @@
 
 package org.usfirst.frc5803.RobotTestBench.commands;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc5803.RobotTestBench.robotold;
+import org.usfirst.frc5803.RobotTestBench.Robot;
 
 /**
  *

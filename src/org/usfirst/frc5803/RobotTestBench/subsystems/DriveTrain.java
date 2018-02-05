@@ -1,6 +1,6 @@
 package org.usfirst.frc5803.RobotTestBench.subsystems;
 
-import org.usfirst.frc5803.RobotTestBench.robotold;
+import org.usfirst.frc5803.RobotTestBench.Robot;
 import org.usfirst.frc5803.RobotTestBench.models.*;
 import org.usfirst.frc5803.RobotTestBench.RobotMap;
 import org.usfirst.frc5803.RobotTestBench.commands.Drive;
@@ -51,8 +51,8 @@ public class DriveTrain extends Subsystem {
     }
     
     public void drive(double left, double right){
-    	this.L1.set(ControlMode.PercentOutput, left);
-    	this.R1.set(ControlMode.PercentOutput, right);
+    	//this.L1.set(ControlMode.PercentOutput, left);
+    	//this.R1.set(ControlMode.PercentOutput, right);
     	//joystickControl.arcadeDrive(move, rotate, true);
 
     }
@@ -73,7 +73,7 @@ public class DriveTrain extends Subsystem {
 
 
     public boolean quickTurnController() {
-    if (robotold.oi.xbox.getY(Hand.kLeft) < 0.2 && robotold.oi.xbox.getY(Hand.kLeft) > -0.2) {
+    if (Robot.oi.xbox.getY(Hand.kLeft) < 0.2 && Robot.oi.xbox.getY(Hand.kLeft) > -0.2) {
 		return true;	
 	} else {
 		return false;
@@ -86,8 +86,8 @@ public class DriveTrain extends Subsystem {
 		TalonSRX _talonL = this.L1;
 		TalonSRX _talonR = this.R1;
 		
-		double leftYstick = robotold.oi.xbox.getY(Hand.kLeft);
-		double rightYstick = robotold.oi.xbox.getY(Hand.kRight);
+		double leftYstick = Robot.oi.xbox.getY(Hand.kLeft);
+		double rightYstick = Robot.oi.xbox.getY(Hand.kRight);
 		double motorOutputL = _talonL.getMotorOutputPercent();
 		double motorOutputR = _talonR.getMotorOutputPercent();
 	    	
@@ -105,7 +105,7 @@ public class DriveTrain extends Subsystem {
 		_sb.append(_talonR.getSelectedSensorVelocity(0));
 		_sb.append("\n");
 	
-		if (robotold.oi.xbox.getAButton()) { //Run left drive
+		if (Robot.oi.xbox.getAButton()) { //Run left drive
 			/* Speed mode */
 			/* Convert 500 RPM to units / 100ms.
 			 * 4096 Units/Rev * 500 RPM / 600 100ms/min in either direction:
@@ -123,7 +123,7 @@ public class DriveTrain extends Subsystem {
 			_sb.append(targetVelocity_UnitsPer100ms);
 			//_sb.append("\n");
 		} 
-		else if (robotold.oi.xbox.getBButton()){ //Run right drive
+		else if (Robot.oi.xbox.getBButton()){ //Run right drive
 			/* Speed mode */
 			/* Convert 500 RPM to units / 100ms.
 			 * 4096 Units/Rev * 500 RPM / 600 100ms/min in either direction:
@@ -163,7 +163,7 @@ public class DriveTrain extends Subsystem {
     }
 	
 	public void End() {
-		robotold.driveTrain.drive(0,0);
+		Robot.driveTrain.drive(0,0);
 	}
 
     // Put methods for controlling this subsystem

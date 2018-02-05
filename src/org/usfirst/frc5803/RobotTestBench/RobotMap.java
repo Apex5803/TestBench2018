@@ -33,6 +33,7 @@ public class RobotMap {
     public static VictorSPX driveTrainDriveTrainR3;
     public static DifferentialDrive joystickControl;
     public static Compressor compressor;
+	public static TalonSRX climber;
 
 
     public static void init() {        
@@ -74,6 +75,8 @@ public class RobotMap {
         driveTrainDriveTrainR3.follow(driveTrainDriveTrainR1);
         driveTrainDriveTrainR3.setNeutralMode(NeutralMode.Coast);
         
+        climber = new TalonSRX(PortMap.PORT_7);
+        climber.setInverted(false);
         //joystickControl = new DifferentialDrive(driveTrainDriveTrainL1, driveTrainDriveTrainR1);
         
        // SmartDashboard.putNumber("Left Encoder Position", driveTrainDriveTrainL1.getSelectedSensorPosition(0));
