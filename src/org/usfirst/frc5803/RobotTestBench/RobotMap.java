@@ -77,6 +77,11 @@ public class RobotMap {
         
         climber = new TalonSRX(PortMap.PORT_7);
         climber.setInverted(false);
+        climber.setSensorPhase(true);
+        climber.configForwardSoftLimitEnable(true, 0);
+        climber.configForwardSoftLimitThreshold(120*4096/360,0);
+        climber.configReverseSoftLimitEnable(true, 0);
+        climber.configReverseSoftLimitThreshold(0*4096,0);
         //joystickControl = new DifferentialDrive(driveTrainDriveTrainL1, driveTrainDriveTrainR1);
         
        // SmartDashboard.putNumber("Left Encoder Position", driveTrainDriveTrainL1.getSelectedSensorPosition(0));

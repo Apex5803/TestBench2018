@@ -50,12 +50,23 @@ public class Arm extends Subsystem {
 		 return this.armmotor.getSelectedSensorPosition(0);
 	 }
 	 public void move(double stickv){
-	    	this.armmotor.set(ControlMode.PercentOutput, stickv);
+		 //System.out.println("move method"+(vgiver()*360/4096));
+		 /*
+		 if(this.armmotor.getSelectedSensorPosition(0)*4096/360>115) {
+		 		double setPoint= 82*4096/360;
+			 	this.armmotor.set(ControlMode.MotionMagic, setPoint);
+			 	System.out.println("Reseting to 110");
+		 	}
+		 	
+		 else	*/
+		 this.armmotor.set(ControlMode.PercentOutput, stickv);
 	 }
 	 public void moveTo(double angle){
 		 //angle*4096 tics per rev./total degrees per revolution 
 		 double setPoint= angle*4096/360;
-		 	this.armmotor.set(ControlMode.MotionMagic, setPoint);
+		 this.armmotor.set(ControlMode.MotionMagic, setPoint);
+		 //System.out.println(angle + ": target angle");
+		 System.out.println( this.armmotor.getSelectedSensorPosition(0)*306/4096 + ": actual angle");
 	 }
 	 public void End() {
 			Robot.arm.move(0);

@@ -60,8 +60,11 @@ public class OI {
         Button Y=new JoystickButton(xbox,4);
         Y.whenPressed(new MoveArmToAngle(75));
         //place on scale angle
-        Button R1=new JoystickButton(xbox,5);
+        Button R1=new JoystickButton(xbox,6);
         R1.whenPressed(new MoveArmToAngle(110));
+        //Manual Override
+        Button LB=new JoystickButton(xbox,5);
+        LB.whenPressed(new moveArm());
       // SmartDashboard Buttons
         //
         SmartDashboard.putData("Drive", new Drive());

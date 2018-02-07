@@ -38,10 +38,10 @@ public class MoveArmToAngle extends Command {
 	protected boolean isFinished() {
 		double movevalue = Robot.arm.vgiver();
 		double targetvalue=this.angle*4096/360;
-		System.out.println("In isFinished() before check, value: " + movevalue + "target: " + targetvalue);
+		//System.out.println("In isFinished() before check, value: " + movevalue + "target: " + targetvalue);
 
 		if((targetvalue+10)<movevalue || movevalue<(targetvalue-10)) {
-			System.out.println("I'm not finished, value: " + movevalue + "target: " + targetvalue);
+			//System.out.println("I'm not finished, value: " + movevalue + "target: " + targetvalue);
 			return false;	
 		}
 		else return true;
