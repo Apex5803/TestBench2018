@@ -11,6 +11,7 @@
 
 package org.usfirst.frc5803.RobotTestBench;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -18,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc5803.RobotTestBench.commands.*;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.DriveForwardFiveFeet;
+import org.usfirst.frc5803.RobotTestBench.models.GameState;
 import org.usfirst.frc5803.RobotTestBench.subsystems.*;
 
 /**
@@ -32,6 +34,8 @@ public class Robot extends TimedRobot {
     Command autonomousCommand;
     SendableChooser<Command> chooser = new SendableChooser<>();
 
+    public GameState gameState;
+    
     public static OI oi;
     public static DriveTrain driveTrain;
     
@@ -69,11 +73,17 @@ public class Robot extends TimedRobot {
     public void disabledInit(){
 
     }
-
+    @Override
+	public void disabledPeriodic() {
+		this.gameState = new GameState(DriverStation.getInstance().getGameSpecificMessage());
+		Scheduler.getInstance().run();
+	}
+/*
     @Override
     public void disabledPeriodic() {
-        Scheduler.getInstance().run();
+      Scheduler.getInstance().run();
     }
+    */
 
     @Override
     public void autonomousInit() {
