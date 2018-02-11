@@ -1,5 +1,7 @@
 package org.usfirst.frc5803.RobotTestBench;
 
+
+import org.usfirst.frc5803.RobotTestBench.utils.TriggerButton;
 import org.usfirst.frc5803.RobotTestBench.commands.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
@@ -47,6 +49,7 @@ public class OI {
     public OI() {
        
         xbox = new XboxController(0);
+
         //pickup angle
         Button A=new JoystickButton(xbox,1);
         A.whenPressed(new MoveArmToAngle(6));
@@ -63,10 +66,19 @@ public class OI {
         Button R1=new JoystickButton(xbox,6);
         R1.whenPressed(new MoveArmToAngle(110));
         //Manual Override
-        Button LB=new JoystickButton(xbox,5);
-        LB.whenPressed(new moveArm());
+       // Button LB=new JoystickButton(xbox,5);
+       // LB.whenPressed(new moveArm());
       // SmartDashboard Buttons
         //
+
+   
+        //manual arm control
+        //Button RT=new TriggerButton(xbox,3);
+        //RT.whileHeld(new moveArm());
+      
+        //RT.whileHeld(System.out.println("holdingtrigger"));
+        // SmartDashboard Buttons
+
         SmartDashboard.putData("Drive", new Drive());
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("other auto", new AutonomousCommand());
