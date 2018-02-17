@@ -76,6 +76,7 @@ public class Robot extends TimedRobot {
     @Override
 	public void disabledPeriodic() {
 		this.gameState = new GameState(DriverStation.getInstance().getGameSpecificMessage());
+		System.out.println(gameState.mySwitchSide);
 		Scheduler.getInstance().run();
 	}
 /*
@@ -125,5 +126,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        System.out.println(gameState);
+    	
     }
 }
