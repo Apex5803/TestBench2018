@@ -18,9 +18,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc5803.RobotTestBench.commands.*;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.AutonomousCommand;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.DriveForwardFiveFeet;
 import org.usfirst.frc5803.RobotTestBench.models.GameState;
 import org.usfirst.frc5803.RobotTestBench.subsystems.*;
+import org.usfirst.frc5803.RobotTestBench.utils.ApexPreferences;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,8 +41,9 @@ public class Robot extends TimedRobot {
     public static OI oi;
     public static DriveTrain driveTrain;
     
-    Compressor compressor = new Compressor (0);
+     public static Compressor compressor = new Compressor (0);
     
+     public static ApexPreferences prefs;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -50,6 +53,7 @@ public class Robot extends TimedRobot {
         RobotMap.init();
         driveTrain = new DriveTrain();
         compressor.setClosedLoopControl(true);
+        prefs = ApexPreferences.getInstance();
 
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
@@ -76,7 +80,7 @@ public class Robot extends TimedRobot {
     @Override
 	public void disabledPeriodic() {
 		this.gameState = new GameState(DriverStation.getInstance().getGameSpecificMessage());
-		System.out.println(gameState.mySwitchSide);
+		//System.out.println(gameState.mySwitchSide);
 		Scheduler.getInstance().run();
 	}
 /*
@@ -88,12 +92,13 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
+    	 AutoSelect.init();
     	/*
         autonomousCommand = chooser.getSelected();
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     */
-    	autonomousCommand = new DriveForwardFiveFeet();
+    	//autonomousCommand = new DriveForwardFiveFeet();
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
@@ -103,7 +108,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
-    	Scheduler.getInstance().run();
+    	AutoSelect.periodic();
+    	//Scheduler.getInstance().run();
     	 SmartDashboard.putNumber("Left Encoder Position", RobotMap.driveTrainDriveTrainL1.getSelectedSensorPosition(0));
          SmartDashboard.putNumber("Left Encoder Velocity", RobotMap.driveTrainDriveTrainL1.getSelectedSensorVelocity(0));
          SmartDashboard.putNumber("Right Encoder Position", RobotMap.driveTrainDriveTrainR1.getSelectedSensorPosition(0));
@@ -126,7 +132,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        System.out.println(gameState);
+        //System.out.println(gameState);
     	
     }
 }

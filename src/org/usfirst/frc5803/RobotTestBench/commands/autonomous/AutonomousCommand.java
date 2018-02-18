@@ -9,7 +9,7 @@
 // it from being updated in the future.
 
 
-package org.usfirst.frc5803.RobotTestBench.commands;
+package org.usfirst.frc5803.RobotTestBench.commands.autonomous;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc5803.RobotTestBench.Robot;
 

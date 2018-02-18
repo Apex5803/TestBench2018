@@ -1,6 +1,8 @@
 package org.usfirst.frc5803.RobotTestBench;
 
 import org.usfirst.frc5803.RobotTestBench.commands.*;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.AutonomousCommand;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
