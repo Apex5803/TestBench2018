@@ -20,8 +20,8 @@ public class AutoSelect {
 	public static SendableChooser autonChooser;
 	public static String AutoName = "Center: Backpack";
 	public static int AutoNumber = 1;
-	public static boolean isRight = false;
-	static Command AutonCommand =  new CommandF();
+	public static boolean isRight = true;
+	static Command AutonCommand =  new CommandA();
 	
 
     public static void init() {
@@ -42,19 +42,25 @@ public class AutoSelect {
 
     public static void cancel() {
         Scheduler.getInstance().removeAll();
-
+        
+        //#IGiveUpOnLife
+        //#AutoIsAnnoying
+        //#Steven
+        //#WhyCan'tProblemsBeSolvedByStarringAtThem
+        //idk
     	//Robot.compressor.setClosedLoopControl(true);
     }
     
     public static void selectAuto(){
     	//System.out.println("is this working yet; "+AutoNumber);
-    	System.out.println("get number; "+(int)Robot.prefs.getNumber("1A: AutoNumber", 1));
-    	System.out.println("get boolean"+Robot.prefs.getBoolean("1A: On Right Side", false));
-         if (AutoNumber != (int) Robot.prefs.getNumber("1A: AutoNumber", 1) || isRight != Robot.prefs.getBoolean("1A: On Right Side", false))
+    	//System.out.println("get number; "+(int)Robot.prefs.getNumber("Auto Selector", 4));
+    	//System.out.println("get boolean"+Robot.prefs.getBoolean("1A: On Right Side", false));
+         //if (AutoNumber != (int) Robot.prefs.getNumber("Auto Selector", 4)) 
     	{
     		System.out.println("please work");
-	    	AutoNumber = (int) Robot.prefs.getNumber("1A: AutoNumber", 1);
-	    	isRight = Robot.prefs.getBoolean("1A: On Right Side", false);
+	    	//AutoNumber = (int) Robot.prefs.getNumber("Auto Selector", 2);
+	    	System.out.println("Autonumber: "+AutoNumber);
+	    	//isRight = Robot.prefs.getBoolean("1A: On Right Side", false);
 	    	switch(AutoNumber){
 	    		case(1):{
 	    			AutoName = "Center: Backpack";
@@ -89,8 +95,9 @@ public class AutoSelect {
 	    		
 	    		default:{
 	    			AutoName = "Center: Backpack";
-	    			AutonCommand = new CommandF();
+	    			AutonCommand = new CommandA();
 	    			break;
+	    			
 	    		}
 	    	}
     	}

@@ -7,9 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class CommandA extends Command{
     public CommandA() {
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    @Override
+    protected void execute() {
     	System.out.println("CommandA ran");
     }
-	
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub

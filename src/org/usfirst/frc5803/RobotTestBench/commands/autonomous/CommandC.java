@@ -7,6 +7,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CommandC extends CommandGroup{
     public CommandC() {
+
+    }
+    
+    @Override
+    protected void execute() {
     	System.out.println("CommandC ran");
     }
 	

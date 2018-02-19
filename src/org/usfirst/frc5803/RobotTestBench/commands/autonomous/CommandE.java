@@ -7,6 +7,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CommandE extends Command{
     public CommandE() {
+    	
+    }
+    
+    @Override
+    protected void execute() {
     	System.out.println("CommandE ran");
     }
 	

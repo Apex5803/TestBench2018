@@ -100,9 +100,9 @@ public class ApexPreferences {
 	   * @return either the value in the table, or the backup
 	   */
 	  public double getNumber(String key, double backup) {
-		 //System.out.println("in Get Number");
+		 System.out.println("in Get Number");
 		  addNumber(key, backup);
-		  //System.out.println("Added number");
+		  System.out.println("Added number");
 	    return prefs.getDouble(key, backup);
 	  }
 	  

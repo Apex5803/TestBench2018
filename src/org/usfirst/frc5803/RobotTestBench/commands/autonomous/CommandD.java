@@ -5,9 +5,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class CommandD extends Command {
     public CommandD() {
-    	System.out.println("CommandD ran");
+    	
     }
 	
+    @Override
+    protected void execute() {
+    	System.out.println("CommandD ran");
+    }
+    
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub

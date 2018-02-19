@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Dashboard {
-	
+	 
 		
 		public static final boolean ENABLE_DASHBOARD = true;
 		
@@ -18,6 +18,9 @@ public class Dashboard {
 	    static double shortOldTime = 0.0;
 	    static double longOldTime = 0.0;
 	    
+	    public static void intializeDashboard() {
+	    	if(ENABLE_DASHBOARD){
+	    		SmartDashboard.putBoolean("Autonomous ENABLED", true);}}
 	    private static void updatePutLong(){
 	    	SmartDashboard.putBoolean("Compressor", Robot.compressor.enabled());
 	    	//SmartDashboard.putData(Robot.gearIntake);

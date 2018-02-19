@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc5803.RobotTestBench.commands.*;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.AutonomousCommand;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.CommandB;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.CommandF;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.DriveForwardFiveFeet;
 import org.usfirst.frc5803.RobotTestBench.models.GameState;
 import org.usfirst.frc5803.RobotTestBench.subsystems.*;
@@ -34,7 +36,9 @@ import org.usfirst.frc5803.RobotTestBench.utils.ApexPreferences;
 public class Robot extends TimedRobot {
 	
     Command autonomousCommand;
+    SendableChooser<Command> autoChooser;
     SendableChooser<Command> chooser = new SendableChooser<>();
+    
 
     public GameState gameState;
     
@@ -43,17 +47,22 @@ public class Robot extends TimedRobot {
     
      public static Compressor compressor = new Compressor (0);
     
-     public static ApexPreferences prefs;
+     //public static ApexPreferences prefs;
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     @Override
     public void robotInit() {
+    	autoChooser= new SendableChooser<Command>();
+    	autoChooser.addDefault("CommandA", new CommandA());
+    	autoChooser.addObject("CommandB", new CommandB());
+    	SmartDashboard.putData("Auto Mode Chooser", autoChooser);
+  
         RobotMap.init();
         driveTrain = new DriveTrain();
         compressor.setClosedLoopControl(true);
-        prefs = ApexPreferences.getInstance();
+        //prefs = ApexPreferences.getInstance();
 
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
@@ -92,7 +101,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-    	 AutoSelect.init();
+    	autonomousCommand = (Command) autoChooser.getSelected();
+    	autonomousCommand.start();
+    	//AutoSelect.init();
     	/*
         autonomousCommand = chooser.getSelected();
         // schedule the autonomous command (example)
@@ -108,8 +119,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
-    	AutoSelect.periodic();
-    	//Scheduler.getInstance().run();
+    	//AutoSelect.periodic();
+    	Scheduler.getInstance().run();
     	 SmartDashboard.putNumber("Left Encoder Position", RobotMap.driveTrainDriveTrainL1.getSelectedSensorPosition(0));
          SmartDashboard.putNumber("Left Encoder Velocity", RobotMap.driveTrainDriveTrainL1.getSelectedSensorVelocity(0));
          SmartDashboard.putNumber("Right Encoder Position", RobotMap.driveTrainDriveTrainR1.getSelectedSensorPosition(0));
