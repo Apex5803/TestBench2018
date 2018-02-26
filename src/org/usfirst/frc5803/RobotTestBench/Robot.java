@@ -19,9 +19,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc5803.RobotTestBench.commands.*;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.AutonomousCommand;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.CenterSwitchAuto;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.CommandB;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.CommandF;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.DriveForwardFiveFeet;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.ScaleLeft;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchLeft;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchRight;
 import org.usfirst.frc5803.RobotTestBench.models.GameState;
 import org.usfirst.frc5803.RobotTestBench.subsystems.*;
 import org.usfirst.frc5803.RobotTestBench.utils.ApexPreferences;
@@ -36,8 +40,8 @@ import org.usfirst.frc5803.RobotTestBench.utils.ApexPreferences;
 public class Robot extends TimedRobot {
 	
     Command autonomousCommand;
-    SendableChooser<Command> autoChooser;
-    SendableChooser<Command> chooser = new SendableChooser<>();
+    SendableChooser<String> autoChooser;
+    //SendableChooser<Command> chooser = new SendableChooser<>();
     
 
     public GameState gameState;
@@ -54,11 +58,12 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-    	autoChooser= new SendableChooser<Command>();
-    	autoChooser.addDefault("CommandA", new CommandA());
-    	autoChooser.addObject("CommandB", new CommandB());
+    	autoChooser= new SendableChooser<String>();
+    	autoChooser.addDefault("CommandA", "CommandA");
+    	//autoChooser.addObject("CommandB", new CommandB());
+    	autoChooser.addObject("CenterSwitchAuto", "CenterSwitchAuto");
     	SmartDashboard.putData("Auto Mode Chooser", autoChooser);
-  
+  //this is a useless comment
         RobotMap.init();
         driveTrain = new DriveTrain();
         compressor.setClosedLoopControl(true);
@@ -72,10 +77,10 @@ public class Robot extends TimedRobot {
 
         // Add commands to Autonomous Sendable Chooser
 
-        chooser.addDefault("Autonomous Command", new AutonomousCommand());
-        chooser.addObject("other auto", new AutonomousCommand());
+       // chooser.addDefault("Autonomous Command", new AutonomousCommand());
+       // chooser.addObject("other auto", new AutonomousCommand());
 
-        SmartDashboard.putData("Auto mode", chooser);
+        //SmartDashboard.putData("Auto mode", autoChooser);
     }
 
     /**
@@ -101,15 +106,31 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-    	autonomousCommand = (Command) autoChooser.getSelected();
-    	autonomousCommand.start();
+//    	autonomousCommand = (Command) autoChooser.getSelected();
+//    	autonomousCommand.start();
+    	  	
+    	
+    	
+    	
+//    	String selectedAuto = (String)autoChooser.getSelected();
+//		switch (selectedAuto) {
+//		case "CenterAuto": 
+//			autonomousCommand = new CenterSwitchAuto(gameState);
+//			 break;
+//		case "LeftAuto":
+//			autonomousCommand = new LeftAuto(gameState);
+//		default:
+//			autonomousCommand = new FollowTrajectory("CrossTheLine");
+//			break; 
+//		}
+		
     	//AutoSelect.init();
     	/*
         autonomousCommand = chooser.getSelected();
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     */
-    	//autonomousCommand = new DriveForwardFiveFeet();
+    	autonomousCommand = new ScaleLeft();
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
