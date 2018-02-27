@@ -18,7 +18,9 @@ public class ScaleLeft extends CommandGroup {
     public ScaleLeft() {
         	try {
     			this.toFollow = importer.importSrxTrajectory("ScaleLeft");
-    			//System.out.println("import" + this.toFollow); 
+    			//System.out.println("import" + this.toFollow);
+    			System.out.println("Running Autonomous Path: ScaleLeft"); 
+
     		} catch (IOException | ParseException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();

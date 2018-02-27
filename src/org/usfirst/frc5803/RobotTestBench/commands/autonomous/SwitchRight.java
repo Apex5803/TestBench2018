@@ -18,6 +18,8 @@ public class SwitchRight extends CommandGroup {
     public SwitchRight() {
         	try {
     			this.toFollow = importer.importSrxTrajectory("SwitchRight");
+    			System.out.println("Running Autonomous Path: SwitchRight"); 
+
     			//System.out.println("import" + this.toFollow); 
     		} catch (IOException | ParseException e) {
     			// TODO Auto-generated catch block

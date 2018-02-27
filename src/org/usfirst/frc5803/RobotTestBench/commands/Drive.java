@@ -44,7 +44,7 @@ public class Drive extends Command {
 		double move = Robot.oi.xbox.getY(Hand.kLeft);
 		double rotate = Robot.oi.xbox.getY(Hand.kRight);
 		//TODO add this fix for making the robot turn the correct direction in teleop
-    	Robot.driveTrain.drive(move, -rotate);
+    	Robot.driveTrain.drive(-move, -rotate);
         }
 
     // Make this return true when this Command no longer needs to run execute()

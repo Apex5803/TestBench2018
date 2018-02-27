@@ -1,11 +1,15 @@
 package org.usfirst.frc5803.RobotTestBench;
 
+import org.usfirst.frc5803.RobotTestBench.commands.Climb;
+//import org.usfirst.frc.team5803.robot.commands.cubeCommands.SpitCubeStandard;
 import org.usfirst.frc5803.RobotTestBench.commands.*;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.AutonomousCommand;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 /**
@@ -49,7 +53,10 @@ public class OI {
         joystickL = new Joystick(1);
         xbox = new XboxController(0);
 
-
+        Button RB2=new JoystickButton(xbox, 6);
+   	 	RB2.whileHeld(new Climb());
+   	 	
+   	 
         // SmartDashboard Buttons
         SmartDashboard.putData("Drive", new Drive());
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());

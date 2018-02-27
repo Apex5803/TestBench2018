@@ -60,11 +60,13 @@ public class DriveTrain extends Subsystem {
     	}
     	
     	if(right < 0.2 && right > -0.2){
-        	this.R1.set(ControlMode.PercentOutput, right);    		
+        	this.R1.set(ControlMode.PercentOutput, 0);    		
     	}
     	else{
         	this.R1.set(ControlMode.PercentOutput, right);	
-    	}//joystickControl.arcadeDrive(move, rotate, true);
+    	}
+    	
+    	//joystickControl.arcadeDrive(move, rotate, true);
 
     }
     /**** NEW METHOD FOR DRIVING PATHS ****/

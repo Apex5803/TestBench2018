@@ -24,6 +24,7 @@ import org.usfirst.frc5803.RobotTestBench.commands.autonomous.CommandB;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.CommandF;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.DriveForwardFiveFeet;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.ScaleLeft;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.ScaleRight;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchLeft;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchRight;
 import org.usfirst.frc5803.RobotTestBench.models.GameState;
@@ -48,7 +49,7 @@ public class Robot extends TimedRobot {
     
     public static OI oi;
     public static DriveTrain driveTrain;
-    
+    public static Climber climber;
      public static Compressor compressor = new Compressor (0);
     
      //public static ApexPreferences prefs;
@@ -60,12 +61,15 @@ public class Robot extends TimedRobot {
     public void robotInit() {
     	autoChooser= new SendableChooser<String>();
     	autoChooser.addDefault("CommandA", "CommandA");
-    	//autoChooser.addObject("CommandB", new CommandB());
-    	autoChooser.addObject("CenterSwitchAuto", "CenterSwitchAuto");
+    	autoChooser.addObject("SwitchLeft", "SwitchLeft");
+    	autoChooser.addObject("SwitchRight", "SwitchRight");
+    	autoChooser.addObject("ScaleLeft", "ScaleLeft");
+    	autoChooser.addObject("ScaleRight", "ScaleRight");
     	SmartDashboard.putData("Auto Mode Chooser", autoChooser);
   //this is a useless comment
         RobotMap.init();
         driveTrain = new DriveTrain();
+        climber = new Climber();
         compressor.setClosedLoopControl(true);
         //prefs = ApexPreferences.getInstance();
 
@@ -112,17 +116,27 @@ public class Robot extends TimedRobot {
     	
     	
     	
-//    	String selectedAuto = (String)autoChooser.getSelected();
-//		switch (selectedAuto) {
-//		case "CenterAuto": 
-//			autonomousCommand = new CenterSwitchAuto(gameState);
-//			 break;
-//		case "LeftAuto":
-//			autonomousCommand = new LeftAuto(gameState);
-//		default:
-//			autonomousCommand = new FollowTrajectory("CrossTheLine");
-//			break; 
-//		}
+    	String selectedAuto = (String)autoChooser.getSelected();
+		switch (selectedAuto) {
+		case "CommandA": 
+			autonomousCommand = new CommandA();
+			 break;
+		case "SwitchLeft":
+			autonomousCommand = new SwitchLeft();
+			break;
+		case "SwitchRight":
+			autonomousCommand = new SwitchRight();
+			break;
+		case "ScaleLeft":
+			autonomousCommand = new ScaleLeft();
+			break;
+		case "ScaleRight":
+			autonomousCommand = new ScaleRight();
+			break;
+		default:
+			autonomousCommand = new CommandA();
+			break; 
+		}
 		
     	//AutoSelect.init();
     	/*
@@ -130,7 +144,11 @@ public class Robot extends TimedRobot {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     */
-    	autonomousCommand = new ScaleLeft();
+    	//autonomousCommand = new SwitchLeft();
+//    	autonomousCommand = new SwitchRight();
+//    	autonomousCommand = new ScaleLeft();
+//    	autonomousCommand = new ScaleRight();
+    	
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }
@@ -142,10 +160,10 @@ public class Robot extends TimedRobot {
     public void autonomousPeriodic() {
     	//AutoSelect.periodic();
     	Scheduler.getInstance().run();
-    	 SmartDashboard.putNumber("Left Encoder Position", RobotMap.driveTrainDriveTrainL1.getSelectedSensorPosition(0));
-         SmartDashboard.putNumber("Left Encoder Velocity", RobotMap.driveTrainDriveTrainL1.getSelectedSensorVelocity(0));
-         SmartDashboard.putNumber("Right Encoder Position", RobotMap.driveTrainDriveTrainR1.getSelectedSensorPosition(0));
-         SmartDashboard.putNumber("Right Encoder Velocity", RobotMap.driveTrainDriveTrainR1.getSelectedSensorVelocity(0));
+//    	 SmartDashboard.putNumber("Left Encoder Position", RobotMap.driveTrainDriveTrainL1.getSelectedSensorPosition(0));
+//         SmartDashboard.putNumber("Left Encoder Velocity", RobotMap.driveTrainDriveTrainL1.getSelectedSensorVelocity(0));
+//         SmartDashboard.putNumber("Right Encoder Position", RobotMap.driveTrainDriveTrainR1.getSelectedSensorPosition(0));
+//         SmartDashboard.putNumber("Right Encoder Velocity", RobotMap.driveTrainDriveTrainR1.getSelectedSensorVelocity(0));
 
     }
 

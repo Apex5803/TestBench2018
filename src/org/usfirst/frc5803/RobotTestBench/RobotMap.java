@@ -31,6 +31,7 @@ public class RobotMap {
     public static TalonSRX driveTrainDriveTrainR1;
     public static VictorSPX driveTrainDriveTrainR2;
     public static VictorSPX driveTrainDriveTrainR3;
+    public static TalonSRX climber;
     public static DifferentialDrive joystickControl;
     public static Compressor compressor;
 
@@ -73,6 +74,10 @@ public class RobotMap {
         driveTrainDriveTrainR3 = new VictorSPX(PortMap.PORT_1);
         driveTrainDriveTrainR3.follow(driveTrainDriveTrainR1);
         driveTrainDriveTrainR3.setNeutralMode(NeutralMode.Coast);
+        
+        climber = new TalonSRX(7);
+        climber.setInverted(false);
+        climber.setNeutralMode(NeutralMode.Coast);
         
         //joystickControl = new DifferentialDrive(driveTrainDriveTrainL1, driveTrainDriveTrainR1);
         
