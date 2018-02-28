@@ -23,8 +23,11 @@ import org.usfirst.frc5803.RobotTestBench.commands.autonomous.CenterSwitchAuto;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.CommandB;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.CommandF;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.DriveForwardFiveFeet;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.ScaleCenter;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.ScaleLeft;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.ScaleRight;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.ScaleRightStartLeft;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchCenter;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchLeft;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchRight;
 import org.usfirst.frc5803.RobotTestBench.models.GameState;
@@ -61,10 +64,11 @@ public class Robot extends TimedRobot {
     public void robotInit() {
     	autoChooser= new SendableChooser<String>();
     	autoChooser.addDefault("CommandA", "CommandA");
-    	autoChooser.addObject("SwitchLeft", "SwitchLeft");
-    	autoChooser.addObject("SwitchRight", "SwitchRight");
-    	autoChooser.addObject("ScaleLeft", "ScaleLeft");
-    	autoChooser.addObject("ScaleRight", "ScaleRight");
+    	autoChooser.addObject("SwitchCenter", "SwitchCenter");
+    	autoChooser.addObject("ScaleCenter", "ScaleCenter");
+    	autoChooser.addObject("ScaleRightStartLeft", "ScaleRightStartLeft");
+
+    	
     	SmartDashboard.putData("Auto Mode Chooser", autoChooser);
   //this is a useless comment
         RobotMap.init();
@@ -121,17 +125,14 @@ public class Robot extends TimedRobot {
 		case "CommandA": 
 			autonomousCommand = new CommandA();
 			 break;
-		case "SwitchLeft":
-			autonomousCommand = new SwitchLeft();
+		case "SwitchCenter":
+			autonomousCommand = new SwitchCenter(gameState);
 			break;
-		case "SwitchRight":
-			autonomousCommand = new SwitchRight();
+		case "ScaleCenter":
+			autonomousCommand = new ScaleCenter(gameState);
 			break;
-		case "ScaleLeft":
-			autonomousCommand = new ScaleLeft();
-			break;
-		case "ScaleRight":
-			autonomousCommand = new ScaleRight();
+		case "ScaleRightStartLeft":
+			autonomousCommand = new ScaleRightStartLeft();
 			break;
 		default:
 			autonomousCommand = new CommandA();
