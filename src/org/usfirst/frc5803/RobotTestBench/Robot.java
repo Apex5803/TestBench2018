@@ -29,7 +29,9 @@ import org.usfirst.frc5803.RobotTestBench.commands.autonomous.ScaleRight;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.ScaleRightStartLeft;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchCenter;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchLeft;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchLeftFromLeft;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchRight;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchRightFromRight;
 import org.usfirst.frc5803.RobotTestBench.models.GameState;
 import org.usfirst.frc5803.RobotTestBench.subsystems.*;
 import org.usfirst.frc5803.RobotTestBench.utils.ApexPreferences;
@@ -67,7 +69,8 @@ public class Robot extends TimedRobot {
     	autoChooser.addObject("SwitchCenter", "SwitchCenter");
     	autoChooser.addObject("ScaleCenter", "ScaleCenter");
     	autoChooser.addObject("ScaleRightStartLeft", "ScaleRightStartLeft");
-
+    	autoChooser.addObject("SwitchRightFromRight", "SwitchRightFromRight");
+    	autoChooser.addObject("SwitchLeftFromLeft", "SwitchLeftFromLeft");
     	
     	SmartDashboard.putData("Auto Mode Chooser", autoChooser);
   //this is a useless comment
@@ -133,6 +136,12 @@ public class Robot extends TimedRobot {
 			break;
 		case "ScaleRightStartLeft":
 			autonomousCommand = new ScaleRightStartLeft();
+			break;
+		case "SwitchRightFromRight":
+			autonomousCommand= new SwitchRightFromRight();
+			break;
+		case "SwitchLeftFromLeft":
+			autonomousCommand= new SwitchLeftFromLeft();
 			break;
 		default:
 			autonomousCommand = new CommandA();
