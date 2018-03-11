@@ -30,7 +30,9 @@ import org.usfirst.frc5803.RobotTestBench.commands.autonomous.ScaleRightStartLef
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchCenter;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchLeft;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchLeftFromLeft;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchLeftFromRight;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchRight;
+import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchRightFromLeft;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.SwitchRightFromRight;
 import org.usfirst.frc5803.RobotTestBench.models.GameState;
 import org.usfirst.frc5803.RobotTestBench.subsystems.*;
@@ -71,6 +73,9 @@ public class Robot extends TimedRobot {
     	autoChooser.addObject("ScaleRightStartLeft", "ScaleRightStartLeft");
     	autoChooser.addObject("SwitchRightFromRight", "SwitchRightFromRight");
     	autoChooser.addObject("SwitchLeftFromLeft", "SwitchLeftFromLeft");
+    	autoChooser.addObject("SwitchLeftFromRight", "SwitchLeftFromRight");
+    	autoChooser.addObject("SwitchRightFromLeft", "SwitchRightFromLeft");
+
     	
     	SmartDashboard.putData("Auto Mode Chooser", autoChooser);
   //this is a useless comment
@@ -142,6 +147,12 @@ public class Robot extends TimedRobot {
 			break;
 		case "SwitchLeftFromLeft":
 			autonomousCommand= new SwitchLeftFromLeft();
+			break;
+		case "SwitchLeftFromRight":
+			autonomousCommand= new SwitchLeftFromRight();
+			break;
+		case "SwitchRightFromLeft":
+			autonomousCommand= new SwitchRightFromLeft();
 			break;
 		default:
 			autonomousCommand = new CommandA();
