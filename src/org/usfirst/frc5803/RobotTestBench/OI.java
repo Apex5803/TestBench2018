@@ -50,8 +50,8 @@ public class OI {
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Drive", new Drive());
-        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("other auto", new AutonomousCommand());
+//        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
+//        SmartDashboard.putData("other auto", new AutonomousCommand());
     }
 
     public Joystick JoystickL() {

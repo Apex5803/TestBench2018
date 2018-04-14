@@ -11,7 +11,9 @@
 
 package org.usfirst.frc5803.RobotTestBench;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -35,6 +37,8 @@ public class Robot extends TimedRobot {
     public static OI oi;
     public static DriveTrain driveTrain;
     
+    DigitalInput limitSwitch;
+    
     Compressor compressor = new Compressor (0);
     
     /**
@@ -46,6 +50,8 @@ public class Robot extends TimedRobot {
         RobotMap.init();
         driveTrain = new DriveTrain();
         compressor.setClosedLoopControl(true);
+        
+        limitSwitch = new DigitalInput(9);
 
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
@@ -55,11 +61,11 @@ public class Robot extends TimedRobot {
 
         // Add commands to Autonomous Sendable Chooser
 
-        chooser.addDefault("Autonomous Command", new AutonomousCommand());
-        chooser.addObject("other auto", new AutonomousCommand());
+//        chooser.addDefault("Autonomous Command", new AutonomousCommand());
+//        chooser.addObject("other auto", new AutonomousCommand());
 
         SmartDashboard.putData("Auto mode", chooser);
-    }
+    } 
 
     /**
      * This function is called when the disabled button is hit.
@@ -115,5 +121,13 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        //while (limitSwitch.get()) {
+        if (limitSwitch.get()) {
+        System.out.println("too far arm");
+			Timer.delay(2);
+		}
+        else {
+        	System.out.println("its ok to keep going");
+        }
     }
 }
