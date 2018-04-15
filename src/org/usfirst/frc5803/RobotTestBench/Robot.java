@@ -11,11 +11,16 @@
 
 package org.usfirst.frc5803.RobotTestBench;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+
+
 import org.usfirst.frc5803.RobotTestBench.commands.*;
 import org.usfirst.frc5803.RobotTestBench.commands.autonomous.DriveForwardFiveFeet;
 import org.usfirst.frc5803.RobotTestBench.subsystems.*;
@@ -29,12 +34,14 @@ import org.usfirst.frc5803.RobotTestBench.subsystems.*;
  */
 public class Robot extends TimedRobot {
 	
-	Command autonomousCommand;
+    Command autonomousCommand;
     SendableChooser<Command> chooser = new SendableChooser<>();
 
     public static OI oi;
     public static DriveTrain driveTrain;
-    public static Arm arm;    
+    public static Arm arm;
+    public static DigitalInput limitSwitch;
+    
     Compressor compressor = new Compressor (0);
     
     /**
@@ -47,19 +54,23 @@ public class Robot extends TimedRobot {
         driveTrain = new DriveTrain();
         compressor.setClosedLoopControl(true);
         arm = new Arm();
+        
+        limitSwitch = new DigitalInput(9);
+
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
         // constructed yet. Thus, their requires() statements may grab null
         // pointers. Bad news. Don't move it.
         oi = new OI();
+        
 
         // Add commands to Autonomous Sendable Chooser
 
-        chooser.addDefault("Autonomous Command", new AutonomousCommand());
-        chooser.addObject("other auto", new AutonomousCommand());
+//        chooser.addDefault("Autonomous Command", new AutonomousCommand());
+//        chooser.addObject("other auto", new AutonomousCommand());
 
         SmartDashboard.putData("Auto mode", chooser);
-    }
+    } 
 
     /**
      * This function is called when the disabled button is hit.
@@ -114,7 +125,20 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-   	 SmartDashboard.putNumber("Climber arm position", Robot.arm.armmotor.getSelectedSensorPosition(0));
         Scheduler.getInstance().run();
+        //while (limitSwitch.get()) {
+        if (limitSwitch.get()) {
+        System.out.println("Ok");
+			Timer.delay(2);
+		}
+        	else {
+        		System.out.println("too close");
+        		//Timer.delay(2);
+        		//System.out.println("get it together");
+        		new moveArm();
+        	}
+        if (limitSwitch.get()) {	
+        	new HoldArmAngle();
+        }
     }
 }

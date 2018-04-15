@@ -22,14 +22,12 @@ import org.usfirst.frc5803.RobotTestBench.subsystems.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-
 /**
  * A subsystem to move Failstorm's climber like an arm.
  */
 public class Arm extends Subsystem {
 	public TalonSRX armmotor = RobotMap.climber;
-	
-	
+
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
@@ -37,30 +35,46 @@ public class Arm extends Subsystem {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
 		setDefaultCommand(new moveArm());
+
 	}
-	 public void configPIDF(double p, double i, double d, double f) {
 
-	    	this.armmotor.config_kP(0, p, 0);
-	    	this.armmotor.config_kI(0, i, 0);
-	    	this.armmotor.config_kD(0, d, 0);
-	    	this.armmotor.config_kF(0, f, 0);
+	public void configPIDF(double p, double i, double d, double f) {
 
-	    }
-	 public double vgiver(){
-		 return this.armmotor.getSelectedSensorPosition(0);
-	 }
-	 public void move(double stickv){
-		 this.armmotor.set(ControlMode.PercentOutput, stickv);
-	 }
-	 public void moveTo(double angle){
-		 //angle*4096 tics per rev./total degrees per revolution 
-		 double setPoint= angle*4096/360;
-		 this.armmotor.set(ControlMode.MotionMagic, setPoint);
-		 //System.out.println(angle + ": target angle");
-		 System.out.println( this.armmotor.getSelectedSensorPosition(0)*306/4096 + ": actual angle");
-	 }
-	 public void End() {
-			Robot.arm.move(0);
-		}
-	 
+		this.armmotor.config_kP(0, p, 0);
+		this.armmotor.config_kI(0, i, 0);
+		this.armmotor.config_kD(0, d, 0);
+		this.armmotor.config_kF(0, f, 0);
+
+	}
+
+	public double vgiver() {
+		return this.armmotor.getSelectedSensorPosition(0);
+	}
+
+	public void move(double stickv) {
+		this.armmotor.set(ControlMode.PercentOutput, stickv);
+	}
+
+	public void moveTo(double angle) {
+		// angle*4096 tics per rev./total degrees per revolution
+		double setPoint = angle * 4096 / 360;
+		this.armmotor.set(ControlMode.MotionMagic, setPoint);
+		// System.out.println(angle + ": target angle");
+		System.out.println(this.armmotor.getSelectedSensorPosition(0) * 306 / 4096 + ": actual angle");
+	}
+
+	public void Extend(ControlMode controlmode, double position) {
+		// Extender1.set(controlmode, position);
+		System.out.println("Is this thing working");
+		this.move(-.15);
+	}
+
+	public void Retract() {
+		this.move(-.30);
+	}
+
+	public void End() {
+		this.move(0);
+	}
+
 }

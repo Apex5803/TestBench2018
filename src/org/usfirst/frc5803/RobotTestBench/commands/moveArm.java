@@ -9,8 +9,12 @@ package org.usfirst.frc5803.RobotTestBench.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc5803.RobotTestBench.robotold2;
+
+import org.usfirst.frc5803.RobotTestBench.Robot;
 import org.usfirst.frc5803.RobotTestBench.subsystems.Arm;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import org.usfirst.frc5803.RobotTestBench.Robot;
 
 /**
@@ -30,15 +34,29 @@ public class moveArm extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-
+		
 		
 		//if(Robot.oi.xbox.getTriggerAxis(Hand.kLeft) > 0.75) {
 			//System.out.println("running full manual test");
 			if(Robot.oi.xbox.getY(Hand.kLeft) > 0.2 || Robot.oi.xbox.getY(Hand.kLeft) < -0.2) {
 				Robot.arm.move(0.2 * Robot.oi.xbox.getY(Hand.kLeft)); 						
 			}
-			else Robot.arm.move(0);
-		}		
+			if(Robot.arm.vgiver() < 10*360/4096) {
+				if(!Robot.limitSwitch.get()) {
+					System.out.println("WHYYYYYY2");
+					Robot.arm.Retract();
+				}
+				else if(Robot.limitSwitch.get()) {
+					System.out.println("WHYYYYYY1");
+					end();
+					new HoldArmAngle();
+					
+				}
+			}
+	}
+			//else Robot.arm.move(0);
+				
+	
 		//else Robot.arm.move(0);
 	//}
 	
@@ -51,12 +69,14 @@ public class moveArm extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		Robot.arm.End();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		end();
 	}
 }
  
